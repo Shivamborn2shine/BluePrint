@@ -208,69 +208,6 @@ const REVIEWS_DB = {
             " क्लेमेंट टाउन आने वाले सभी लोगों को यहाँ ज़रूर आना चाहिए। शानदार अनुभव!",
             " ज़रूर विज़िट करें, आपको बहुत पसंद आएगा!"
         ]
-    },
-
-    // =======================================================================
-    // 4. KANNADA REVIEWS
-    // =======================================================================
-    KANNADA: {
-        openings: [
-            "Blue Door Café & Bakes ge bandu thumba santhosha aayithu! ",
-            "ಇಲ್ಲಿನ ವಾತಾವರಣ ಮತ್ತು ತಿಂಡಿಗಳು ನಿಜಕ್ಕೂ ಅದ್ಭುತವಾಗಿವೆ. ",
-            "Nanna snehithara jothege illi bandidde, thumba chennagidhe! "
-        ],
-        categories: {
-            ALL: [
-                "Illina ellavu thindi galu fresh matthu thumba ruchi aagidhe.",
-                "Coffee matthu cakes quality 10/10, thumba ishta aayithu.",
-                "Shanta vaathavarana matthu utthama aahaara."
-            ],
-            BISCOFF: [
-                "Lotus Biscoff cheesecake thumba creamy matthu delicious aagidhe!",
-                "Biscoff cheesecake illi kanditha try maadi, thumba ruchi!"
-            ],
-            TIRAMISU: [
-                "Tiramisu cup thumba authentic matthu ruchi aagidhe.",
-                "Coffee flavor matthu cream combo thumba chennagidhe."
-            ],
-            PANCAKES: [
-                "Pancakes thumba soft matthu fluffy aagidhe.",
-                "Fresh blueberry pancakes thumba ishta aayithu."
-            ],
-            PASTA: [
-                "Penne pasta ruchi adbhutha aagidhe, spicy & delicious.",
-                "Pasta preparation thumba utthama aagidhe."
-            ],
-            CAKES: [
-                "Cakes thumba fresh matthu soft aagidhe.",
-                "Bento cake design matthu taste eradoo super!"
-            ],
-            COFFEE: [
-                "Illina specialty coffee thumba fresh matthu aromatic aagidhe.",
-                "Coffee lovers ge idhu ondu utthama spot."
-            ],
-            AMBIANCE: [
-                "Cafe interior matthu ambience thumba shanta matthu sundara aagidhe.",
-                "Photo thegeyalu thumba aesthetic place."
-            ],
-            AMBIENCE: [
-                "Cafe interior matthu ambience thumba shanta matthu sundara aagidhe.",
-                "Photo thegeyalu thumba aesthetic place."
-            ],
-            SERVICE: [
-                "Staff thumba vinamravagi matthu sahayaka aagi iddare.",
-                "Seve thumba bega matthu utthama aagithu."
-            ],
-            CLEANLINESS: [
-                "Cafe thumba swachhavagi matthu hygienic aagi idhe.",
-                "Hygiene standards thumba chennagidhe."
-            ]
-        },
-        closings: [
-            " Matthe kanditha baruttene!",
-            " Ellarigoo highly recommend maaduttene.",
-            " Thumba utthama anubhava!"
-        ]
     }
 };
 

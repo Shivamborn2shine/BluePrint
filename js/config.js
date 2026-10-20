@@ -30,7 +30,7 @@ const SITE_LINKS = {
 
     // --- GOOGLE MAP EMBED (iframe src) -------------------------------------
     // From Google Maps -> Share -> Embed a map -> copy only the src="..." URL.
-    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3297.704247068065!2d77.9985567!3d30.272292299999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092b003a555405%3A0x78b00122e639c58b!2sScoop%20n%20brew!5e1!3m2!1sen!2sin!4v1792495036661!5m2!1sen!2sin',
+    mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3298.0186942214077!2d77.99681487526102!3d30.262931208186323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092b746f09dd97%3A0xc8815e220ba52a93!2sBlue%20Door%20Cafe%20and%20Bakes!5e1!3m2!1sen!2sin!4v1792500845424!5m2!1sen!2sin',
 
     // --- GOOGLE REVIEW SUBMISSION PAGE -------------------------------------
     // Redirects the user here immediately after clicking "Copy & Open Google Review".

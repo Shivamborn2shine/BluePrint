@@ -97,6 +97,10 @@ class DeveloperEditor {
         if (directionsBtn) {
             directionsBtn.href = d.links.googleMapsUrl;
         }
+        const instagramBtn = document.getElementById('instagramStoreBtn');
+        if (instagramBtn) {
+            instagramBtn.href = d.links.instagramUrl || (window.SITE_LINKS && window.SITE_LINKS.instagramUrl) || 'https://www.instagram.com/blue_door_cafe';
+        }
         const addressLink = document.getElementById('addressLink');
         if (addressLink) {
             addressLink.href = d.links.googleMapsUrl;
@@ -149,6 +153,7 @@ class DeveloperEditor {
             window.SITE_LINKS.mapEmbedUrl = d.links.mapsEmbedUrl;
             window.SITE_LINKS.googleReviewUrl = d.links.googleReviewUrl;
             window.SITE_LINKS.googlePlaceId = d.links.googlePlaceId;
+            if (d.links.instagramUrl) window.SITE_LINKS.instagramUrl = d.links.instagramUrl;
         }
         if (window.BUSINESS_CONFIG) {
             window.BUSINESS_CONFIG.name = d.brand.name;
@@ -551,6 +556,10 @@ class DeveloperEditor {
                             <input type="text" id="inp_links_embedUrl" value="${d.links.mapsEmbedUrl}" class="w-full p-2 border border-slate-300 rounded-xl">
                         </div>
                         <div>
+                            <label class="block font-bold text-slate-700 mb-1">Instagram Profile URL</label>
+                            <input type="text" id="inp_links_instagramUrl" value="${d.links.instagramUrl || ''}" class="w-full p-2 border border-slate-300 rounded-xl" placeholder="https://www.instagram.com/yourhandle">
+                        </div>
+                        <div>
                             <label class="block font-bold text-slate-700 mb-1">Menu Link (PDF or Web URL)</label>
                             <input type="text" id="inp_links_menuUrl" value="${d.links.menuUrl || ''}" class="w-full p-2 border border-slate-300 rounded-xl" placeholder="e.g. /menu.pdf or https://...">
                         </div>
@@ -728,6 +737,7 @@ class DeveloperEditor {
                     d.links.googleReviewUrl = document.getElementById('inp_links_reviewUrl').value;
                     d.links.googleMapsUrl = document.getElementById('inp_links_mapsUrl').value;
                     d.links.mapsEmbedUrl = document.getElementById('inp_links_embedUrl').value;
+                    d.links.instagramUrl = document.getElementById('inp_links_instagramUrl')?.value || d.links.instagramUrl;
                     d.links.menuUrl = document.getElementById('inp_links_menuUrl').value;
                 }
 
