@@ -103,7 +103,7 @@
         </header>
 
         <!-- SCROLLABLE CONTENT BODY -->
-        <div class="flex-1 overflow-y-auto pb-10 space-y-6">
+        <div id="mainScrollBody" class="flex-1 overflow-y-auto pb-10 space-y-6">
 
             <!-- ═══════════════════════════════════════════════════════════════ -->
             <!-- SCREEN 1: STORE FRONT & MENU SECTION -->
@@ -606,43 +606,132 @@
                     <div class="flex items-center justify-between mb-3">
                         <div class="flex items-center gap-2">
                             <span class="text-base">📸</span>
-                            <h3 class="text-sm font-extrabold text-slate-900">Gallery</h3>
+                            <h3 class="text-sm font-extrabold text-slate-900">Culinary Gallery</h3>
                         </div>
-                        <span class="text-xs font-bold text-indigo-600 hover:underline cursor-pointer">8 Photos</span>
+                        <span id="galleryCountBadge"
+                            class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2.5 py-0.5 rounded-full">8 Items</span>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-2.5">
-                        <div class="h-32 rounded-2xl overflow-hidden shadow-sm relative group cursor-pointer"
-                            onclick="openPhotoModal('./assets/images/blue-door/biscoff-cheesecake.jpg')">
+                    <!-- Category Filter Tabs -->
+                    <div class="flex items-center gap-1.5 mb-3.5 overflow-x-auto hide-scrollbar pb-1 text-[11px] font-bold">
+                        <button type="button" onclick="filterGallery('all')" id="gFilter-all"
+                            class="g-filter-btn px-3 py-1 rounded-xl bg-slate-900 text-white shadow-sm transition-all flex-shrink-0">
+                            All (8)
+                        </button>
+                        <button type="button" onclick="filterGallery('bakes')" id="gFilter-bakes"
+                            class="g-filter-btn px-3 py-1 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all flex-shrink-0">
+                            🍰 Cakes & Bakes (6)
+                        </button>
+                        <button type="button" onclick="filterGallery('brunch')" id="gFilter-brunch"
+                            class="g-filter-btn px-3 py-1 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all flex-shrink-0">
+                            🥞 Brunch & Savory (2)
+                        </button>
+                    </div>
+
+                    <!-- 8 Gallery Items Grid -->
+                    <div id="galleryGrid" class="grid grid-cols-2 gap-2.5">
+                        <!-- Photo 0: Biscoff -->
+                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
+                            data-category="bakes" onclick="openGalleryModal(0)">
                             <img src="./assets/images/blue-door/biscoff-cheesecake.jpg" alt="Lotus Biscoff Cheesecake"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <span
-                                class="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm">Biscoff
-                                Cake</span>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Cheesecake</span>
+                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Lotus Biscoff</span>
+                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                            </div>
                         </div>
-                        <div class="h-32 rounded-2xl overflow-hidden shadow-sm relative group cursor-pointer"
-                            onclick="openPhotoModal('./assets/images/blue-door/fluffy-pancakes.jpg')">
-                            <img src="./assets/images/blue-door/fluffy-pancakes.jpg" alt="Fluffy Pancakes"
+
+                        <!-- Photo 1: Pancakes -->
+                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
+                            data-category="brunch" onclick="openGalleryModal(1)">
+                            <img src="./assets/images/blue-door/fluffy-pancakes.jpg" alt="Fluffy Blueberry Pancakes"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <span
-                                class="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm">Blueberry
-                                Pancakes</span>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Brunch</span>
+                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Blueberry Pancakes</span>
+                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                            </div>
                         </div>
-                        <div class="h-32 rounded-2xl overflow-hidden shadow-sm relative group cursor-pointer"
-                            onclick="openPhotoModal('./assets/images/blue-door/penne-pasta.jpg')">
+
+                        <!-- Photo 2: Penne Pasta -->
+                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
+                            data-category="brunch" onclick="openGalleryModal(2)">
                             <img src="./assets/images/blue-door/penne-pasta.jpg" alt="Penne Arrabbiata Pasta"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <span
-                                class="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm">Arrabbiata
-                                Pasta</span>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Savory</span>
+                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Arrabbiata Pasta</span>
+                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                            </div>
                         </div>
-                        <div class="h-32 rounded-2xl overflow-hidden shadow-sm relative group cursor-pointer"
-                            onclick="openPhotoModal('./assets/images/blue-door/tiramisu-cup.jpg')">
-                            <img src="./assets/images/blue-door/tiramisu-cup.jpg" alt="Tiramisu Cup"
+
+                        <!-- Photo 3: Tiramisu Cup -->
+                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
+                            data-category="bakes" onclick="openGalleryModal(3)">
+                            <img src="./assets/images/blue-door/tiramisu-cup.jpg" alt="Classic Tiramisu Cup"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <span
-                                class="absolute bottom-1.5 left-1.5 px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm">Tiramisu
-                                Cup</span>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Dessert</span>
+                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Tiramisu Cup</span>
+                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                            </div>
+                        </div>
+
+                        <!-- Photo 4: Bento Cake -->
+                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
+                            data-category="bakes" onclick="openGalleryModal(4)">
+                            <img src="./assets/images/blue-door/bento-cake.jpg" alt="Floral Bento Cake"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Bento Cake</span>
+                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Bento Floral Cake</span>
+                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                            </div>
+                        </div>
+
+                        <!-- Photo 5: Spiced Carrot Cake -->
+                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
+                            data-category="bakes" onclick="openGalleryModal(5)">
+                            <img src="./assets/images/blue-door/carrot-cake.jpg" alt="Spiced Walnut Carrot Cake"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Artisanal</span>
+                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Carrot Cake</span>
+                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                            </div>
+                        </div>
+
+                        <!-- Photo 6: Signature Cheesecake -->
+                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
+                            data-category="bakes" onclick="openGalleryModal(6)">
+                            <img src="./assets/images/blue-door/cheesecake-cafe.jpg" alt="Signature Baked Cheesecake"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Cheesecake</span>
+                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Baked Cheesecake</span>
+                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                            </div>
+                        </div>
+
+                        <!-- Photo 7: Orange Cake -->
+                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
+                            data-category="bakes" onclick="openGalleryModal(7)">
+                            <img src="./assets/images/blue-door/orange-cake.jpg" alt="Citrus Glazed Orange Cake"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Citrus Glaze</span>
+                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Orange Cake</span>
+                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -754,7 +843,7 @@
 
                 <!-- Social Follow Icons -->
                 <div class="p-4 flex items-center justify-center gap-4">
-                    <a href="https://instagram.com" target="_blank"
+                    <a href="https://www.instagram.com/blue_door_cafe" target="_blank"
                         class="w-10 h-10 rounded-full bg-white shadow-sm border border-slate-200 flex items-center justify-center text-slate-600 hover:text-pink-600 hover:border-pink-300 transition-all">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path
@@ -789,13 +878,68 @@
 
     </main>
 
-    <!-- Photo Lightbox Modal -->
+    <!-- Photo Lightbox Modal (Full Featured with Next/Prev/Touch/Keyboard) -->
     <div id="photoModal"
-        class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 hidden"
+        class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 hidden select-none"
         onclick="closePhotoModal()">
-        <div class="max-w-md w-full relative" onclick="event.stopPropagation()">
-            <button onclick="closePhotoModal()" class="absolute -top-10 right-0 text-white text-xl font-bold">✕</button>
-            <img id="modalImg" src="" alt="Enlarged view" class="w-full rounded-3xl shadow-2xl">
+        <div class="w-full max-w-md bg-slate-900 border border-white/10 rounded-3xl p-4 sm:p-5 flex flex-col gap-3 shadow-2xl relative"
+            onclick="event.stopPropagation()">
+
+            <!-- Top Controls: Category Pill, Counter & Close Button -->
+            <div class="flex items-center justify-between pb-0.5">
+                <div class="flex items-center gap-2">
+                    <span id="modalCategoryBadge"
+                        class="px-2.5 py-0.5 rounded-full bg-white/10 text-amber-300 text-[10px] font-extrabold tracking-wide uppercase border border-white/10">
+                        Cheesecake
+                    </span>
+                    <span id="modalCounter" class="text-xs font-bold text-slate-400">1 / 8</span>
+                </div>
+                <button type="button" onclick="closePhotoModal()"
+                    class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm font-bold transition-all active:scale-95"
+                    title="Close Lightbox">
+                    ✕
+                </button>
+            </div>
+
+            <!-- Main Image & Navigation Arrows -->
+            <div class="relative w-full h-64 sm:h-72 rounded-2xl overflow-hidden bg-black/60 flex items-center justify-center group"
+                id="modalTouchArea">
+                <img id="modalImg" src="" alt="Culinary item preview"
+                    class="w-full h-full object-cover transition-opacity duration-200">
+
+                <!-- Previous Arrow Button -->
+                <button type="button" onclick="navigateGallery(-1)"
+                    class="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center text-xl font-bold backdrop-blur-md transition-all active:scale-90 border border-white/20 shadow-xl"
+                    title="Previous Photo">
+                    ‹
+                </button>
+
+                <!-- Next Arrow Button -->
+                <button type="button" onclick="navigateGallery(1)"
+                    class="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center text-xl font-bold backdrop-blur-md transition-all active:scale-90 border border-white/20 shadow-xl"
+                    title="Next Photo">
+                    ›
+                </button>
+            </div>
+
+            <!-- Details & Caption -->
+            <div class="space-y-1">
+                <h4 id="modalTitle" class="text-sm font-extrabold text-white leading-snug">Lotus Biscoff Cheesecake</h4>
+                <p id="modalDesc" class="text-xs text-slate-300 leading-relaxed">Creamy layered artisanal cheesecake with authentic Lotus Biscoff spread and biscuit crumb crust.</p>
+            </div>
+
+            <!-- Quick Action: Review with AI Button -->
+            <button type="button" id="modalReviewBtn" onclick="reviewCurrentModalDish()"
+                class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs py-2.5 px-3 rounded-xl shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-1.5 transition-all active:scale-95">
+                <span>✨</span>
+                <span>Review this Dish with AI</span>
+                <span>→</span>
+            </button>
+
+            <!-- Dot Indicators -->
+            <div id="modalDots" class="flex items-center justify-center gap-1.5 pt-0.5">
+                <!-- Rendered dynamically -->
+            </div>
         </div>
     </div>
 
@@ -1177,12 +1321,7 @@
         }
 
         // Smooth Scroll & Tab Switcher
-        function scrollToSection(id) {
-            const el = document.getElementById(id);
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth' });
-            }
-
+        function setActivePill(id) {
             document.querySelectorAll('.nav-pill').forEach(p => {
                 p.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
                 p.classList.add('text-slate-500');
@@ -1197,14 +1336,249 @@
             }
         }
 
-        // Photo Lightbox
-        function openPhotoModal(src) {
-            document.getElementById('modalImg').src = src;
-            document.getElementById('photoModal').classList.remove('hidden');
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+            setActivePill(id);
         }
+
+        // ═══════════════════════════════════════════════════════════════
+        // FULL-FEATURED CULINARY GALLERY & LIGHTBOX ENGINE
+        // ═══════════════════════════════════════════════════════════════
+        const GALLERY_ITEMS = [
+            {
+                id: 'biscoff-cheesecake',
+                src: './assets/images/blue-door/biscoff-cheesecake.jpg',
+                title: 'Lotus Biscoff Cheesecake',
+                category: 'bakes',
+                categoryLabel: 'Cheesecake',
+                desc: 'Creamy layered artisanal cheesecake with authentic Lotus Biscoff spread and spiced biscuit crumb crust.',
+                aiCategory: 'BISCOFF'
+            },
+            {
+                id: 'fluffy-pancakes',
+                src: './assets/images/blue-door/fluffy-pancakes.jpg',
+                title: 'Fluffy Blueberry Pancakes',
+                category: 'brunch',
+                categoryLabel: 'Brunch',
+                desc: 'Golden soufflé-style stacked pancakes layered with organic blueberries, churned butter, and pure maple syrup.',
+                aiCategory: 'PANCAKES'
+            },
+            {
+                id: 'penne-pasta',
+                src: './assets/images/blue-door/penne-pasta.jpg',
+                title: 'Penne Arrabbiata Pasta',
+                category: 'brunch',
+                categoryLabel: 'Savory',
+                desc: 'Al dente penne in a slow-simmered fiery tomato pomodoro sauce with aromatic fresh Italian herbs and garlic.',
+                aiCategory: 'PASTA'
+            },
+            {
+                id: 'tiramisu-cup',
+                src: './assets/images/blue-door/tiramisu-cup.jpg',
+                title: 'Classic Tiramisu Cup',
+                category: 'bakes',
+                categoryLabel: 'Dessert',
+                desc: 'Authentic Italian recipe with espresso-dipped ladyfingers, velvety mascarpone cream, and Dutch cocoa dust.',
+                aiCategory: 'TIRAMISU'
+            },
+            {
+                id: 'bento-cake',
+                src: './assets/images/blue-door/bento-cake.jpg',
+                title: 'Handcrafted Bento Cake',
+                category: 'bakes',
+                categoryLabel: 'Bento Cake',
+                desc: 'Charming personal mini celebration cake with delicate handcrafted buttercream floral decor.',
+                aiCategory: 'CAKES'
+            },
+            {
+                id: 'carrot-cake',
+                src: './assets/images/blue-door/carrot-cake.jpg',
+                title: 'Spiced Walnut Carrot Cake',
+                category: 'bakes',
+                categoryLabel: 'Artisanal Cake',
+                desc: 'Moist spiced sponge packed with fresh grated carrots, toasted walnuts, and silky cream cheese frosting.',
+                aiCategory: 'CAKES'
+            },
+            {
+                id: 'cheesecake-cafe',
+                src: './assets/images/blue-door/cheesecake-cafe.jpg',
+                title: 'Signature New York Cheesecake',
+                category: 'bakes',
+                categoryLabel: 'Cheesecake',
+                desc: 'Dense, rich, and velvety classic New York style baked cheesecake served fresh from our pastry vitrine.',
+                aiCategory: 'BISCOFF'
+            },
+            {
+                id: 'orange-cake',
+                src: './assets/images/blue-door/orange-cake.jpg',
+                title: 'Citrus Glazed Orange Cake',
+                category: 'bakes',
+                categoryLabel: 'Citrus Glaze',
+                desc: 'Fragrant zest-infused sponge topped with hand-caramelized candied orange slices and citrus syrup.',
+                aiCategory: 'CAKES'
+            }
+        ];
+
+        let currentGalleryIndex = 0;
+        let activeGalleryCategory = 'all';
+
+        // Filter Gallery Items by Category
+        function filterGallery(category) {
+            activeGalleryCategory = category;
+            const cards = document.querySelectorAll('.gallery-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (category === 'all' || cardCat === category) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            // Update filter buttons
+            document.querySelectorAll('.g-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-slate-900', 'text-white');
+                btn.classList.add('bg-slate-100', 'text-slate-600');
+            });
+            const activeBtn = document.getElementById('gFilter-' + category);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
+                activeBtn.classList.add('bg-slate-900', 'text-white');
+            }
+
+            // Update badge
+            const badge = document.getElementById('galleryCountBadge');
+            if (badge) {
+                badge.textContent = `${visibleCount} Item${visibleCount === 1 ? '' : 's'}`;
+            }
+        }
+
+        // Open Modal at specific index
+        function openGalleryModal(index) {
+            currentGalleryIndex = (index + GALLERY_ITEMS.length) % GALLERY_ITEMS.length;
+            renderModalState();
+            const modal = document.getElementById('photoModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Backward compatibility
+        function openPhotoModal(srcOrIndex) {
+            if (typeof srcOrIndex === 'number') {
+                openGalleryModal(srcOrIndex);
+            } else if (typeof srcOrIndex === 'string') {
+                const foundIndex = GALLERY_ITEMS.findIndex(item => item.src === srcOrIndex || srcOrIndex.includes(item.src.split('/').pop()));
+                openGalleryModal(foundIndex >= 0 ? foundIndex : 0);
+            } else {
+                openGalleryModal(0);
+            }
+        }
+
         function closePhotoModal() {
-            document.getElementById('photoModal').classList.add('hidden');
+            const modal = document.getElementById('photoModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
         }
+
+        function navigateGallery(delta) {
+            currentGalleryIndex = (currentGalleryIndex + delta + GALLERY_ITEMS.length) % GALLERY_ITEMS.length;
+            renderModalState();
+        }
+
+        function renderModalState() {
+            const item = GALLERY_ITEMS[currentGalleryIndex];
+            if (!item) return;
+
+            const imgEl = document.getElementById('modalImg');
+            if (imgEl) {
+                imgEl.style.opacity = '0.3';
+                setTimeout(() => {
+                    imgEl.src = item.src;
+                    imgEl.alt = item.title;
+                    imgEl.style.opacity = '1';
+                }, 80);
+            }
+
+            const titleEl = document.getElementById('modalTitle');
+            if (titleEl) titleEl.textContent = item.title;
+
+            const descEl = document.getElementById('modalDesc');
+            if (descEl) descEl.textContent = item.desc;
+
+            const badgeEl = document.getElementById('modalCategoryBadge');
+            if (badgeEl) badgeEl.textContent = item.categoryLabel;
+
+            const counterEl = document.getElementById('modalCounter');
+            if (counterEl) counterEl.textContent = `${currentGalleryIndex + 1} / ${GALLERY_ITEMS.length}`;
+
+            // Render dot indicators
+            const dotsContainer = document.getElementById('modalDots');
+            if (dotsContainer) {
+                dotsContainer.innerHTML = GALLERY_ITEMS.map((_, i) => `
+                    <button type="button" onclick="openGalleryModal(${i})"
+                        class="h-1.5 rounded-full transition-all ${i === currentGalleryIndex ? 'w-5 bg-amber-400' : 'w-1.5 bg-white/30 hover:bg-white/60'}"
+                        title="View photo ${i + 1}">
+                    </button>
+                `).join('');
+            }
+        }
+
+        // Link directly from modal to AI Review
+        function reviewCurrentModalDish() {
+            const item = GALLERY_ITEMS[currentGalleryIndex];
+            closePhotoModal();
+            if (item && item.aiCategory) {
+                quickSelectCategory(item.aiCategory);
+                showToast(`Selected ${item.title}! Customizing your review...`, '✨');
+            } else {
+                scrollToSection('aiSection');
+            }
+        }
+
+        // Keyboard navigation for Lightbox
+        window.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('photoModal');
+            if (modal && !modal.classList.contains('hidden')) {
+                if (e.key === 'ArrowLeft') {
+                    navigateGallery(-1);
+                } else if (e.key === 'ArrowRight') {
+                    navigateGallery(1);
+                } else if (e.key === 'Escape') {
+                    closePhotoModal();
+                }
+            }
+        });
+
+        // Touch Swipe Navigation for Mobile
+        window.addEventListener('DOMContentLoaded', () => {
+            let touchStartX = 0;
+            let touchEndX = 0;
+            const touchArea = document.getElementById('modalTouchArea');
+
+            if (touchArea) {
+                touchArea.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
+
+                touchArea.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    const diff = touchEndX - touchStartX;
+                    if (Math.abs(diff) > 40) {
+                        if (diff < 0) {
+                            navigateGallery(1); // Swipe left -> Next
+                        } else {
+                            navigateGallery(-1); // Swipe right -> Prev
+                        }
+                    }
+                }, { passive: true });
+            }
+        });
 
         // Share API
         function sharePage() {
@@ -1234,6 +1608,26 @@
         // Auto-run on load
         window.addEventListener('DOMContentLoaded', () => {
             generateAIReview();
+
+            // Setup Scroll Spy to synchronize top nav pills on scroll
+            const scrollBody = document.getElementById('mainScrollBody');
+            const sections = ['homeSection', 'aiSection', 'gallerySection'];
+            const sectionEls = sections.map(id => document.getElementById(id)).filter(Boolean);
+
+            if ('IntersectionObserver' in window && scrollBody && sectionEls.length > 0) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
+                            setActivePill(entry.target.id);
+                        }
+                    });
+                }, {
+                    root: scrollBody,
+                    threshold: [0.25, 0.5]
+                });
+
+                sectionEls.forEach(el => observer.observe(el));
+            }
         });
     </script>
 
