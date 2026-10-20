@@ -53,8 +53,8 @@ export const DEFAULT_STORE_DATA = {
         googlePlaceId: '14447932579898534547',
         googleReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJl90Jb3QrCTkRkyqlCyJegcg',
         googleWriteReviewUrl: 'https://search.google.com/local/writereview?placeid=14447932579898534547',
-        googleMapsUrl: 'https://www.google.com/maps/place/Blue+Door+Cafe+and+Bakes/@30.2629266,77.9993898,17z/data=!4m8!3m7!1s0x39092b746f09dd97:0xc8815e220ba52a93!8m2!3d30.2629266!4d77.9993898!9m1!1b1!16s%2Fg%2F11vcwgp634',
-        mapsEmbedUrl: 'https://maps.google.com/maps?q=30.2629266,77.9993898&t=&z=16&ie=UTF8&iwloc=&output=embed',
+        googleMapsUrl: 'https://www.google.com/maps?cid=8696452129855489419',
+        mapsEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3297.704247068065!2d77.9985567!3d30.272292299999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092b003a555405%3A0x78b00122e639c58b!2sScoop%20n%20brew!5e1!3m2!1sen!2sin!4v1792495036661!5m2!1sen!2sin',
         menuUrl: '#',
         menuLabel: 'Browse Menu'
     },
