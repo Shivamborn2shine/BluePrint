@@ -23,7 +23,6 @@ A 100% standalone, zero-dependency, mobile-optimized AI Review & Experience Web 
 ```text
 Bluedoor/
 ├── index.html                   # Primary entrypoint for deployment (zero configuration needed)
-├── blue-door.html               # Alias entrypoint
 ├── package.json                 # Optional NPM scripts for local development / hosting
 ├── vercel.json                  # Clean URL & rewrite rules for Vercel
 ├── netlify.toml                 # Redirect & security headers for Netlify
