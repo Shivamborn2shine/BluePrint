@@ -31,6 +31,11 @@ class DeveloperEditor {
                 this.data.links.mapsEmbedUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3297.704247068065!2d77.9985567!3d30.272292299999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092b003a555405%3A0x78b00122e639c58b!2sScoop%20n%20brew!5e1!3m2!1sen!2sin!4v1792495036661!5m2!1sen!2sin';
                 saveStoreData(this.data);
             }
+            if (!this.data.links.googlePlaceId || this.data.links.googlePlaceId === '14447932579898534547') {
+                this.data.links.googlePlaceId = 'ChIJl90Jb3QrCTkRkyqlCyJegcg';
+                this.data.links.googleWriteReviewUrl = 'https://search.google.com/local/writereview?placeid=ChIJl90Jb3QrCTkRkyqlCyJegcg';
+                saveStoreData(this.data);
+            }
         }
 
         // Hydrate the DOM with active data
