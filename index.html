@@ -591,7 +591,7 @@
 
                     <!-- Generate Review Button -->
                     <div class="mt-5">
-                        <button type="button" onclick="generateAIReview()" id="generateBtn"
+                        <button type="button" onclick="generateAIReview(); scrollToReviewCTA();" id="generateBtn"
                             class="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 hover:opacity-95 text-white font-extrabold text-sm py-3.5 rounded-2xl shadow-xl shadow-indigo-500/30 flex items-center justify-center gap-2 transition-all active:scale-[0.98]">
                             <span>✨</span>
                             <span>Generate Review with AI</span>
@@ -632,7 +632,7 @@
                             <span id="editBtnText">Edit Review</span>
                         </button>
 
-                        <button type="button" onclick="copyAndOpenGoogle()"
+                        <button type="button" onclick="copyAndOpenGoogle()" id="copyToGoogleBtn"
                             class="sm:col-span-8 bg-slate-900 hover:bg-black text-white font-extrabold text-xs py-3 px-4 rounded-2xl shadow-xl shadow-slate-900/20 transition-all flex items-center justify-center gap-2 active:scale-95">
                             <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24">
                                 <path fill="#4285F4"
@@ -1282,6 +1282,17 @@
             }
 
             generateAIReview();
+            scrollToReviewCTA();
+        }
+
+        // Smooth scroll to make "Copy & Open Google Review" button visible
+        function scrollToReviewCTA() {
+            setTimeout(() => {
+                const target = document.getElementById('copyToGoogleBtn');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                }
+            }, 120);
         }
 
         function quickSelectCategory(cat) {
@@ -1292,6 +1303,7 @@
             if (matchingBtn) matchingBtn.classList.add('chip-active');
             scrollToSection('aiSection');
             generateAIReview();
+            setTimeout(scrollToReviewCTA, 350);
         }
 
         // Language Switcher
