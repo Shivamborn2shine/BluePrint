@@ -32,8 +32,8 @@ class DeveloperEditor {
                 saveStoreData(this.data);
             }
             if (!this.data.links.googlePlaceId || this.data.links.googlePlaceId === '14447932579898534547') {
-                this.data.links.googlePlaceId = 'ChIJl90Jb3QrCTkRkyqlCyJegcg';
-                this.data.links.googleWriteReviewUrl = 'https://search.google.com/local/writereview?placeid=ChIJl90Jb3QrCTkRkyqlCyJegcg';
+                this.data.links.googlePlaceId = 'ChIJBVRVOgArCTkRi8U55iIBsHg';
+                this.data.links.googleWriteReviewUrl = 'https://search.google.com/local/writereview?placeid=ChIJBVRVOgArCTkRi8U55iIBsHg';
                 saveStoreData(this.data);
             }
         }
@@ -87,9 +87,19 @@ class DeveloperEditor {
             callBtn.href = `tel:${d.contact.phone}`;
             callBtn.title = `Call ${d.brand.name} (${d.contact.phoneDisplay})`;
         }
+        const whatsappBtn = document.getElementById('whatsappStoreBtn');
+        if (whatsappBtn) {
+            const cleanWa = (d.contact.whatsapp || '').replace(/[^0-9]/g, '');
+            const waMsg = encodeURIComponent(`Hi ${d.brand.name}, I would like to order or reserve a table`);
+            whatsappBtn.href = `https://wa.me/${cleanWa}?text=${waMsg}`;
+        }
         const directionsBtn = document.getElementById('directionsBtn');
         if (directionsBtn) {
             directionsBtn.href = d.links.googleMapsUrl;
+        }
+        const addressLink = document.getElementById('addressLink');
+        if (addressLink) {
+            addressLink.href = d.links.googleMapsUrl;
         }
         const menuBtn = document.getElementById('menuBtn');
         if (menuBtn) {
@@ -132,6 +142,14 @@ class DeveloperEditor {
 
         // Update Global references
         window.CURRENT_STORE_DATA = d;
+        if (window.SITE_LINKS) {
+            window.SITE_LINKS.phone = d.contact.phone;
+            window.SITE_LINKS.whatsappNumber = d.contact.whatsapp;
+            window.SITE_LINKS.googleMapsUrl = d.links.googleMapsUrl;
+            window.SITE_LINKS.mapEmbedUrl = d.links.mapsEmbedUrl;
+            window.SITE_LINKS.googleReviewUrl = d.links.googleReviewUrl;
+            window.SITE_LINKS.googlePlaceId = d.links.googlePlaceId;
+        }
         if (window.BUSINESS_CONFIG) {
             window.BUSINESS_CONFIG.name = d.brand.name;
             window.BUSINESS_CONFIG.phone = d.contact.phone;
@@ -184,28 +202,38 @@ class DeveloperEditor {
     }
 
     renderGallery() {
-        const grid = document.getElementById('galleryGrid');
-        if (!grid || !this.data.gallery) return;
+        const track = document.getElementById('galleryMarqueeTrack') || document.getElementById('galleryGrid');
+        if (!track || !this.data.gallery) return;
 
-        grid.innerHTML = this.data.gallery.map((item, index) => `
-            <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
+        const renderCards = (items) => items.map((item, index) => `
+            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
                 data-category="${item.category}" onclick="openGalleryModal(${index})">
                 <img src="${item.src}" alt="${item.title}"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
-                <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">${item.categoryLabel}</span>
-                <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
-                    <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">${item.tag || item.title}</span>
-                    <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity"></div>
+                <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">${item.categoryLabel}</span>
+                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">${item.tag || item.title}</p>
+                    <span class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                        <span>Tap to view</span> <span>🔍</span>
+                    </span>
                 </div>
             </div>
         `).join('');
+
+        // Duplicate set for seamless continuous marquee loop
+        track.innerHTML = renderCards(this.data.gallery) + renderCards(this.data.gallery);
 
         // Sync global GALLERY_ITEMS used by lightbox
         window.GALLERY_ITEMS = this.data.gallery;
         const countBadge = document.getElementById('galleryCountBadge');
         if (countBadge) {
             countBadge.textContent = `${this.data.gallery.length} Items`;
+        }
+        const showAllBtn = document.getElementById('galleryShowAllBtn');
+        if (showAllBtn) {
+            const countSpan = showAllBtn.querySelector('.count-badge');
+            if (countSpan) countSpan.textContent = this.data.gallery.length;
         }
     }
 

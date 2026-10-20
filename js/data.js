@@ -10,6 +10,8 @@
  * will instantly update across the entire web application.
  */
 
+import { REVIEWS_DB } from './reviews-db.js';
+
 export const DEFAULT_STORE_DATA = {
     // ═══════════════════════════════════════════════════════════════
     // 1. BRAND & STORE IDENTITY
@@ -48,13 +50,26 @@ export const DEFAULT_STORE_DATA = {
 
     // ═══════════════════════════════════════════════════════════════
     // 3. ACTION BUTTONS & EXTERNAL LINKS
+    // (Edit these URLs to change redirect destinations site-wide)
     // ═══════════════════════════════════════════════════════════════
     links: {
-        googlePlaceId: 'ChIJl90Jb3QrCTkRkyqlCyJegcg',
-        googleReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJl90Jb3QrCTkRkyqlCyJegcg',
-        googleWriteReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJl90Jb3QrCTkRkyqlCyJegcg',
+        // Google Place ID (used to identify business on Google)
+        googlePlaceId: 'ChIJBVRVOgArCTkRi8U55iIBsHg',
+
+        // Direct Google Review Page (redirects user here after copying review)
+        googleReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJBVRVOgArCTkRi8U55iIBsHg',
+        googleWriteReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJBVRVOgArCTkRi8U55iIBsHg',
+
+        // Directions / Navigation Link ("Directions", "Find Us", "Open in Maps")
         googleMapsUrl: 'https://www.google.com/maps?cid=8696452129855489419',
+
+        // Interactive Map Embed (Google Maps iframe src)
         mapsEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3297.704247068065!2d77.9985567!3d30.272292299999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092b003a555405%3A0x78b00122e639c58b!2sScoop%20n%20brew!5e1!3m2!1sen!2sin!4v1792495036661!5m2!1sen!2sin',
+
+        // Instagram Profile Link
+        instagramUrl: 'https://www.instagram.com/blue_door_cafe',
+
+        // Menu Link & Button Label
         menuUrl: '#',
         menuLabel: 'Browse Menu'
     },
@@ -122,154 +137,9 @@ export const DEFAULT_STORE_DATA = {
     ],
 
     // ═══════════════════════════════════════════════════════════════
-    // 6. AI REVIEW TEMPLATE BANK (Multi-language)
+    // 6. AI REVIEW TEMPLATE BANK (Managed centrally in js/reviews-db.js)
     // ═══════════════════════════════════════════════════════════════
-    reviewBank: {
-        ENGLISH: {
-            openings: [
-                "Hands down one of the coziest cafes in town! ",
-                "Visited Blue Door Café & Bakes today and was completely blown away. ",
-                "If you have a sweet tooth or love good coffee, this place is heaven! ",
-                "Such a charming aesthetic cafe with genuinely delicious food. ",
-                "Tried this spot on a friend's recommendation and it exceeded all expectations! ",
-                "Easily a 5-star experience from the ambience to the dessert counter. ",
-                "Finally found my new favorite weekend brunch spot! "
-            ],
-            categories: {
-                ALL: [
-                    "Everything we ordered was crafted to perfection. Zero complaints, genuine 10/10 quality.",
-                    "Loved every single item! The vibe is so relaxing and the bakes are top notch.",
-                    "The perfect blend of warm hospitality, artisanal pastries, and rich brews."
-                ],
-                BISCOFF: [
-                    "The Lotus Biscoff cheesecake is an absolute showstopper! Incredibly creamy and perfectly balanced.",
-                    "If you visit, you MUST try the Lotus Biscoff cheesecake. Hands down the best in the city!"
-                ],
-                TIRAMISU: [
-                    "The Tiramisu cup with ladyfinger biscuit was heavenly! Rich, velvety coffee flavor.",
-                    "Authentic Italian style tiramisu done right. Soft, creamy and not overly sweet."
-                ],
-                PANCAKES: [
-                    "The fluffy blueberry pancakes were pure bliss! Warm, pillowy, and generously topped.",
-                    "Best pancakes I have had in a long time! Perfectly fluffy with real berries and maple drizzle."
-                ],
-                PASTA: [
-                    "The Penne Arrabbiata was cooked perfectly al dente with rich spicy tomato pomodoro.",
-                    "Savory menu is surprisingly great! Loved the tangy and spicy penne pasta."
-                ],
-                CAKES: [
-                    "The cake vitrine is dangerous! The orange glaze cake and spiced carrot cake are mouthwatering.",
-                    "Ordered their bento floral cake for a birthday and it was both gorgeous and delectable!"
-                ],
-                COFFEE: [
-                    "The roasted coffee is smooth with zero bitterness. Best flat white and iced latte around.",
-                    "Specialty coffee here pairs so well with their fresh baked goods. A must-visit for coffee lovers."
-                ],
-                AMBIENCE: [
-                    "The interior aesthetics are so calming and European-inspired. Perfect for dates or remote work.",
-                    "Cozy lighting, aesthetic corners, and soft background music make it a wonderful spot."
-                ]
-            },
-            closings: [
-                " Staff was incredibly warm and attentive throughout. Will definitely be returning soon!",
-                " Highly recommend everyone to visit if you are near Clement Town. Truly a 10/10 gem!",
-                " Can't wait to come back and try the rest of their bakery menu!",
-                " Definitely worth multiple visits. Kudos to the baking team!"
-            ]
-        },
-        HINDI: {
-            openings: [
-                "ब्लू डोर कैफे एंड बेक्स का अनुभव बहुत ही शानदार रहा! ",
-                "देहरादून में सबसे बेहतरीन और खूबसूरत कैफे में से एक! ",
-                "अगर आपको स्वादिष्ट डेसर्ट और बेहतरीन कॉफी पसंद है, तो यहाँ ज़रूर आएं। ",
-                "शानदार माहौल और लाजवाब स्वाद, पूरी तरह से 5-स्टार अनुभव!"
-            ],
-            categories: {
-                ALL: [
-                    "यहाँ का खाना और बेकरी का हर आइटम बहुत ही ताज़ा और स्वादिष्ट था।",
-                    "बहुत ही सुकून भरा माहौल और बेहतरीन सर्विस। सब कुछ बहुत बढ़िया लगा।"
-                ],
-                BISCOFF: [
-                    "लोटस बिस्कॉफ चीज़केक का स्वाद वाकई लाजवाब है! एकदम क्रीमी और परफेक्ट।",
-                    "बिस्कॉफ चीज़केक यहाँ की बेस्ट डिश है, इसका स्वाद हमेशा याद रहेगा।"
-                ],
-                TIRAMISU: [
-                    "तिरामिसू कप बहुत ही स्वादिष्ट और फ्रेश था। कॉफी और मस्कार्पोन का बेहतरीन कॉम्बिनेशन!",
-                    "असली इटैलियन तिरामिसू का स्वाद मिला, मीठा भी एकदम संतुलित था।"
-                ],
-                PANCAKES: [
-                    "ब्लूबेरी पैनकेक्स बहुत ही सॉफ्ट और फ्लफी थे, ऊपर से मेपल सिरप बहुत बढ़िया लगा।",
-                    "नाश्ते के लिए पैनकेक्स एकदम बेस्ट हैं। बहुत हल्का और टेस्टी।"
-                ],
-                PASTA: [
-                    "पेने अराबियाटा पास्ता बहुत ही टेस्टी और स्पाइसी था, सॉस एकदम फ्रेश थी।",
-                    "पास्ता बहुत ही बढ़िया बना था, इटैलियन फ्लेवर्स पूरी तरह से महसूस हुए।"
-                ],
-                CAKES: [
-                    "बेंटो केक और कैरट केक का स्वाद बेहद उम्दा था। डिज़ाइन भी बहुत सुंदर था।",
-                    "केक बहुत ही फ्रेश और सॉफ्ट थे, हर बाइट में बेहतरीन क्वालिटी का अहसास।"
-                ],
-                COFFEE: [
-                    "यहाँ की कॉफी बहुत ही स्ट्रॉन्ग और रिच है। कॉफी लवर्स के लिए बेस्ट जगह।",
-                    "कैपुचीनो और कोल्ड कॉफी दोनों का स्वाद बहुत ही लाजवाब रहा।"
-                ],
-                AMBIENCE: [
-                    "कैफे का इंटीरियर बहुत ही खूबसूरत और सुकून देने वाला है। फोटो खिंचवाने के लिए बेस्ट स्पॉट!",
-                    "शांतिपूर्ण माहौल और अच्छी सिटिंग अरेंजमेंट, दोस्तों और फैमिली के साथ बैठने के लिए शानदार।"
-                ]
-            },
-            closings: [
-                " स्टाफ का व्यवहार बहुत विनम्र और मददगार था। हम दोबारा ज़रूर आएंगे!",
-                " क्लेमेंट टाउन आने वाले सभी लोगों को यहाँ ज़रूर आना चाहिए। शानदार अनुभव!",
-                " ज़रूर विज़िट करें, आपको बहुत पसंद आएगा!"
-            ]
-        },
-        KANNADA: {
-            openings: [
-                "ಬ್ಲೂ ಡೋರ್ ಕೆಫೆ ಮತ್ತು ಬೇಕ್ಸ್‌ನಲ್ಲಿ ಅದ್ಭುತ ಅನುಭವ! ",
-                "ಅತ್ಯುತ್ತಮ ಪರಿಸರ ಮತ್ತು ರುಚಿಕರವಾದ ತಿಂಡಿಗಳು ಇಲ್ಲಿ ಲಭ್ಯವಿದೆ. ",
-                "ಕಾಫಿ ಮತ್ತು ಡೆಸರ್ಟ್ ಪ್ರಿಯರಿಗೆ ಇದು ನಿಜಕ್ಕೂ ಸ್ವರ್ಗ!"
-            ],
-            categories: {
-                ALL: [
-                    "ನಾವು ಆರ್ಡರ್ ಮಾಡಿದ ಪ್ರತಿಯೊಂದು ಖಾದ್ಯವೂ ತುಂಬಾ ರುಚಿಯಾಗಿತ್ತು.",
-                    "ಉತ್ತಮ ಗುಣಮಟ್ಟ ಮತ್ತು ಸುಂದರವಾದ ಕೆಫೆ ವಾತಾವರಣ."
-                ],
-                BISCOFF: [
-                    "ಲೋಟಸ್ ಬಿಸ್ಕಾಫ್ ಚೀಸ್‌ಕೇಕ್ ನಿಜಕ್ಕೂ ಅದ್ಭುತವಾಗಿತ್ತು! ತುಂಬಾ ಕ್ರೀಮಿ ಮತ್ತು ಟೇಸ್ಟಿ.",
-                    "ಇಲ್ಲಿನ ಬಿಸ್ಕಾಫ್ ಚೀಸ್‌ಕೇಕ್ ಪ್ರತಿಯೊಬ್ಬರೂ ಸವಿಯಲೇಬೇಕಾದ ತಿನಿಸು."
-                ],
-                TIRAMISU: [
-                    "ಟಿಸಾಮಿಸು ಕಪ್ ತುಂಬಾ ತಾಜಾ ಮತ್ತು ರುಚಿಯಾಗಿತ್ತು.",
-                    "ಅತ್ಯುತ್ತಮ ಇಟಾಲಿಯನ್ ಶೈಲಿಯ ಟಿಸಾಮಿಸು ರುಚಿ."
-                ],
-                PANCAKES: [
-                    "ಮೃದುವಾದ ಬ್ಲೂಬೆರ್ರಿ ಪ್ಯಾನ್‌ಕೇಕ್‌ಗಳು ತುಂಬಾ ರುಚಿಯಾಗಿದ್ದವು.",
-                    "ಉಪಹಾರಕ್ಕೆ ಅತ್ಯುತ್ತಮ ಆಯ್ಕೆ."
-                ],
-                PASTA: [
-                    "ಪೆನ್ನೆ ಪಾಸ್ತಾ ತುಂಬಾ ರುಚಿಕರವಾಗಿ ಮತ್ತು ಖಾರವಾಗಿತ್ತು.",
-                    "ಉತ್ತಮವಾದ ಇಟಾಲಿಯನ್ ಸಾಸ್ ರುಚಿ."
-                ],
-                CAKES: [
-                    "ಇಲ್ಲಿನ ವಿಶೇಷ ಕ್ಯಾರೆಟ್ ಕೇಕ್ ಮತ್ತು ಬೆಂಟೋ ಕೇಕ್‌ಗಳು ಅತ್ಯಂತ ರುಚಿಕರ.",
-                    "ತಾಜಾ ಬೆಣ್ಣೆ ಮತ್ತು ಉತ್ತಮ ಗುಣಮಟ್ಟದ ಕೇಕ್‌ಗಳು."
-                ],
-                COFFEE: [
-                    "ಕಾಫಿಯ ಪರಿಮಳ ಮತ್ತು ರುಚಿ ಅದ್ಭುತವಾಗಿತ್ತು.",
-                    "ವಿಶೇಷ ಅರೇಬಿಕಾ ಕಾಫಿ ಬೀಜಗಳ ರಿಚ್ ರುಚಿ."
-                ],
-                AMBIENCE: [
-                    "ಸುಂದರವಾದ ಕೆಫೆ ವಿನ್ಯಾಸ ಮತ್ತು ಶಾಂತಿಯುತ ಪರಿಸರ.",
-                    "ಕುಟುಂಬ ಮತ್ತು ಸ್ನೇಹಿತರೊಂದಿಗೆ ಸಮಯ ಕಳೆಯಲು ಉತ್ತಮ ಜಾಗ."
-                ]
-            },
-            closings: [
-                " ಸಿಬ್ಬಂದಿ ತುಂಬಾ ಆತ್ಮೀಯವಾಗಿ ಸೇವೆ ನೀಡಿದರು. ಖಂಡಿತವಾಗಿಯೂ ಮತ್ತೆ ಭೇಟಿ ನೀಡುತ್ತೇವೆ!",
-                " ಎಲ್ಲರೂ ಖಂಡಿತವಾಗಿ ಭೇಟಿ ನೀಡಬೇಕಾದ ಅದ್ಭುತ ಕೆಫೆ!"
-            ]
-        }
-    },
+    reviewBank: REVIEWS_DB,
 
     // ═══════════════════════════════════════════════════════════════
     // 7. CULINARY GALLERY ITEMS (All 8 Items)

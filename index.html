@@ -56,6 +56,33 @@
             font-weight: 700 !important;
         }
 
+        /* Continuous Row Marquee Animation for Culinary Gallery */
+        @keyframes marqueeLeft {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .gallery-marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marqueeLeft 34s linear infinite;
+        }
+
+        .gallery-marquee-track:hover,
+        .gallery-marquee-track:focus-within {
+            animation-play-state: paused;
+        }
+
+        .gallery-fade-mask {
+            mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+        }
+
         /* Developer Visual Edit Mode Styles */
         body.dev-mode-active img:hover {
             outline: 3px dashed #F59E0B !important;
@@ -169,8 +196,8 @@
 
                     <div class="flex items-center justify-center gap-1.5 mt-1">
                         <div id="ratingStars" class="flex text-amber-400 text-xs">★★★★★</div>
-                        <span id="ratingValue" class="text-xs font-extrabold text-slate-800">4.9</span>
-                        <span id="ratingCountText" class="text-[11px] text-slate-500">(1,240+ reviews)</span>
+                        <span id="ratingValue" class="text-xs font-extrabold text-slate-800">4.2</span>
+                        <span id="ratingCountText" class="text-[11px] text-slate-500">(110+ reviews)</span>
                         <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google"
                             class="h-3 ml-1 opacity-80">
                     </div>
@@ -195,9 +222,9 @@
                             Italian Comforts</span>
                     </div>
 
-                    <!-- Action Buttons Row (Call, WhatsApp, Directions, Menu, Share) -->
-                    <div class="grid grid-cols-5 gap-2 pt-5 mt-4 border-t border-slate-100">
-                        <a id="callStoreBtn" href="tel:+917455866408" class="flex flex-col items-center gap-1.5 group">
+                    <!-- Action Buttons Row (Call, WhatsApp, Directions, Instagram, Menu, Share) -->
+                    <div class="grid grid-cols-6 gap-1 sm:gap-2 pt-5 mt-4 border-t border-slate-100">
+                        <a id="callStoreBtn" href="#" data-link="call" class="flex flex-col items-center gap-1.5 group">
                             <div
                                 class="w-11 h-11 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-all">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -209,9 +236,8 @@
                             <span class="text-[10px] font-bold text-slate-600">Call</span>
                         </a>
 
-                        <a id="whatsappStoreBtn"
-                            href="https://wa.me/917455866408?text=Hi%20Blue%20Door%20Caf%C3%A9%20%26%20Bakes,%20I%20would%20like%20to%20order%20or%20reserve%20a%20table"
-                            target="_blank" class="flex flex-col items-center gap-1.5 group">
+                        <a id="whatsappStoreBtn" href="#" data-link="whatsapp" target="_blank"
+                            class="flex flex-col items-center gap-1.5 group">
                             <div
                                 class="w-11 h-11 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-all">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -222,7 +248,7 @@
                             <span class="text-[10px] font-bold text-slate-600">WhatsApp</span>
                         </a>
 
-                        <a id="directionsBtn" href="https://www.google.com/maps?cid=8696452129855489419" target="_blank"
+                        <a id="directionsBtn" href="#" data-link="directions" target="_blank"
                             class="flex flex-col items-center gap-1.5 group">
                             <div
                                 class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-rose-500 to-pink-500 text-white flex items-center justify-center shadow-md shadow-pink-500/20 group-hover:scale-105 transition-all">
@@ -236,6 +262,18 @@
                                 </svg>
                             </div>
                             <span class="text-[10px] font-bold text-slate-600">Directions</span>
+                        </a>
+
+                        <a id="instagramStoreBtn" href="#" data-link="instagram" target="_blank"
+                            class="flex flex-col items-center gap-1.5 group">
+                            <div
+                                class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white flex items-center justify-center shadow-md shadow-pink-500/25 group-hover:scale-105 transition-all">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                </svg>
+                            </div>
+                            <span class="text-[10px] font-bold text-slate-600">Instagram</span>
                         </a>
 
                         <a id="menuBtn" href="#menu" onclick="scrollToSection('specialitiesRow')"
@@ -410,7 +448,7 @@
                         <span class="text-xs text-slate-400">▼</span>
                     </div>
 
-                    <a href="https://www.google.com/maps?cid=8696452129855489419" target="_blank"
+                    <a id="addressLink" href="#" data-link="directions" target="_blank"
                         class="bg-white rounded-2xl p-3.5 border border-slate-100 flex items-center justify-between shadow-sm hover:border-blue-200 transition-colors">
                         <div class="flex items-center gap-3">
                             <span class="text-blue-500 text-base">📍</span>
@@ -620,188 +658,356 @@
             <!-- ═══════════════════════════════════════════════════════════════ -->
             <section id="gallerySection" class="px-3 space-y-4">
 
-                <!-- Gallery Grid (from uploaded food images) -->
-                <div class="bg-white rounded-3xl p-5 border border-slate-100 shadow-sm">
+                <!-- Culinary Gallery Row (Continuous Right-to-Left Moving Row with End Fades) -->
+                <div class="bg-white rounded-3xl p-4 sm:p-5 border border-slate-100 shadow-sm overflow-hidden">
                     <div class="flex items-center justify-between mb-3">
                         <div class="flex items-center gap-2">
                             <span class="text-base">📸</span>
                             <h3 class="text-sm font-extrabold text-slate-900">Culinary Gallery</h3>
                         </div>
-                        <span id="galleryCountBadge"
-                            class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2.5 py-0.5 rounded-full">8
-                            Items</span>
-                    </div>
-
-                    <!-- Category Filter Tabs -->
-                    <div
-                        class="flex items-center gap-1.5 mb-3.5 overflow-x-auto hide-scrollbar pb-1 text-[11px] font-bold">
-                        <button type="button" onclick="filterGallery('all')" id="gFilter-all"
-                            class="g-filter-btn px-3 py-1 rounded-xl bg-slate-900 text-white shadow-sm transition-all flex-shrink-0">
-                            All (8)
-                        </button>
-                        <button type="button" onclick="filterGallery('bakes')" id="gFilter-bakes"
-                            class="g-filter-btn px-3 py-1 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all flex-shrink-0">
-                            🍰 Cakes & Bakes (6)
-                        </button>
-                        <button type="button" onclick="filterGallery('brunch')" id="gFilter-brunch"
-                            class="g-filter-btn px-3 py-1 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all flex-shrink-0">
-                            🥞 Brunch & Savory (2)
+                        <!-- Show All Button at Right Corner -->
+                        <button type="button" onclick="openGalleryModal(0)" id="galleryShowAllBtn"
+                            class="text-xs font-bold text-indigo-600 hover:text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-full transition-all flex items-center gap-1.5 active:scale-95 shadow-sm"
+                            title="View all photos">
+                            <span>Show All</span>
+                            <span
+                                class="count-badge text-[10px] bg-indigo-600 text-white px-1.5 py-0.2 rounded-full font-bold">8</span>
+                            <span>→</span>
                         </button>
                     </div>
 
-                    <!-- 8 Gallery Items Grid -->
-                    <div id="galleryGrid" class="grid grid-cols-2 gap-2.5">
-                        <!-- Photo 0: Biscoff -->
-                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
-                            data-category="bakes" onclick="openGalleryModal(0)">
-                            <img src="./assets/images/blue-door/biscoff-cheesecake.jpg" alt="Lotus Biscoff Cheesecake"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
-                            </div>
-                            <span
-                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Cheesecake</span>
-                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
-                                <span
-                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Lotus
-                                    Biscoff</span>
-                                <span
-                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
-                            </div>
+                    <!-- Moving Row: Fading out at ends & slowly moving leftward -->
+                    <div class="relative overflow-hidden gallery-fade-mask -mx-4 sm:-mx-5 px-4 sm:px-5">
+                        <!-- Left Fade Gradient -->
+                        <div
+                            class="pointer-events-none absolute inset-y-0 left-0 w-8 sm:w-14 bg-gradient-to-r from-white via-white/80 to-transparent z-10">
+                        </div>
+                        <!-- Right Fade Gradient -->
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 w-8 sm:w-14 bg-gradient-to-l from-white via-white/80 to-transparent z-10">
                         </div>
 
-                        <!-- Photo 1: Pancakes -->
-                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
-                            data-category="brunch" onclick="openGalleryModal(1)">
-                            <img src="./assets/images/blue-door/fluffy-pancakes.jpg" alt="Fluffy Blueberry Pancakes"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
-                            </div>
-                            <span
-                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Brunch</span>
-                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                        <!-- Continuous Moving Marquee Track (Right to Left) -->
+                        <div id="galleryMarqueeTrack" class="gallery-marquee-track gap-3 py-1">
+                            <!-- ── Photo 0: Biscoff ── -->
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(0)">
+                                <img src="./assets/images/blue-door/biscoff-cheesecake.jpg"
+                                    alt="Lotus Biscoff Cheesecake"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
                                 <span
-                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Blueberry
-                                    Pancakes</span>
-                                <span
-                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Cheesecake</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">Lotus
+                                        Biscoff</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Photo 2: Penne Pasta -->
-                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
-                            data-category="brunch" onclick="openGalleryModal(2)">
-                            <img src="./assets/images/blue-door/penne-pasta.jpg" alt="Penne Arrabbiata Pasta"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
-                            </div>
-                            <span
-                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Savory</span>
-                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                            <!-- ── Photo 1: Pancakes ── -->
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(1)">
+                                <img src="./assets/images/blue-door/fluffy-pancakes.jpg" alt="Fluffy Blueberry Pancakes"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
                                 <span
-                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Arrabbiata
-                                    Pasta</span>
-                                <span
-                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Brunch</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">
+                                        Blueberry Pancakes</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Photo 3: Tiramisu Cup -->
-                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
-                            data-category="bakes" onclick="openGalleryModal(3)">
-                            <img src="./assets/images/blue-door/tiramisu-cup.jpg" alt="Classic Tiramisu Cup"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
-                            </div>
-                            <span
-                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Dessert</span>
-                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                            <!-- ── Photo 2: Penne Pasta ── -->
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(2)">
+                                <img src="./assets/images/blue-door/penne-pasta.jpg" alt="Penne Arrabbiata Pasta"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
                                 <span
-                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Tiramisu
-                                    Cup</span>
-                                <span
-                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Savory</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">
+                                        Arrabbiata Pasta</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Photo 4: Bento Cake -->
-                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
-                            data-category="bakes" onclick="openGalleryModal(4)">
-                            <img src="./assets/images/blue-door/bento-cake.jpg" alt="Floral Bento Cake"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
-                            </div>
-                            <span
-                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Bento
-                                Cake</span>
-                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                            <!-- ── Photo 3: Tiramisu Cup ── -->
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(3)">
+                                <img src="./assets/images/blue-door/tiramisu-cup.jpg" alt="Classic Tiramisu Cup"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
                                 <span
-                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Bento
-                                    Floral Cake</span>
-                                <span
-                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Dessert</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">
+                                        Tiramisu Cup</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Photo 5: Spiced Carrot Cake -->
-                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
-                            data-category="bakes" onclick="openGalleryModal(5)">
-                            <img src="./assets/images/blue-door/carrot-cake.jpg" alt="Spiced Walnut Carrot Cake"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
-                            </div>
-                            <span
-                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Artisanal</span>
-                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                            <!-- ── Photo 4: Bento Cake ── -->
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(4)">
+                                <img src="./assets/images/blue-door/bento-cake.jpg" alt="Floral Bento Cake"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
                                 <span
-                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Carrot
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Bento
                                     Cake</span>
-                                <span
-                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">Bento
+                                        Floral Cake</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Photo 6: Signature Cheesecake -->
-                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
-                            data-category="bakes" onclick="openGalleryModal(6)">
-                            <img src="./assets/images/blue-door/cheesecake-cafe.jpg" alt="Signature Baked Cheesecake"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
-                            </div>
-                            <span
-                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Cheesecake</span>
-                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                            <!-- ── Photo 5: Spiced Carrot Cake ── -->
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(5)">
+                                <img src="./assets/images/blue-door/carrot-cake.jpg" alt="Spiced Walnut Carrot Cake"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
                                 <span
-                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Baked
-                                    Cheesecake</span>
-                                <span
-                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Artisanal</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">Carrot
+                                        Cake</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Photo 7: Orange Cake -->
-                        <div class="gallery-card group relative h-36 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100"
-                            data-category="bakes" onclick="openGalleryModal(7)">
-                            <img src="./assets/images/blue-door/orange-cake.jpg" alt="Citrus Glazed Orange Cake"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
-                            </div>
-                            <span
-                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Citrus
-                                Glaze</span>
-                            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+                            <!-- ── Photo 6: Signature Cheesecake ── -->
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(6)">
+                                <img src="./assets/images/blue-door/cheesecake-cafe.jpg"
+                                    alt="Signature Baked Cheesecake"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
                                 <span
-                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Orange
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Cheesecake</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">Baked
+                                        Cheesecake</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- ── Photo 7: Orange Cake ── -->
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(7)">
+                                <img src="./assets/images/blue-door/orange-cake.jpg" alt="Citrus Glazed Orange Cake"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
+                                <span
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Citrus
+                                    Glaze</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">Orange
+                                        Cake</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- ════ DUPLICATE SET FOR SEAMLESS CONTINUOUS LOOP ════ -->
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(0)">
+                                <img src="./assets/images/blue-door/biscoff-cheesecake.jpg"
+                                    alt="Lotus Biscoff Cheesecake"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
+                                <span
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Cheesecake</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">Lotus
+                                        Biscoff</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(1)">
+                                <img src="./assets/images/blue-door/fluffy-pancakes.jpg" alt="Fluffy Blueberry Pancakes"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
+                                <span
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Brunch</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">
+                                        Blueberry Pancakes</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(2)">
+                                <img src="./assets/images/blue-door/penne-pasta.jpg" alt="Penne Arrabbiata Pasta"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
+                                <span
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Savory</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">
+                                        Arrabbiata Pasta</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(3)">
+                                <img src="./assets/images/blue-door/tiramisu-cup.jpg" alt="Classic Tiramisu Cup"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
+                                <span
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Dessert</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">
+                                        Tiramisu Cup</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(4)">
+                                <img src="./assets/images/blue-door/bento-cake.jpg" alt="Floral Bento Cake"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
+                                <span
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Bento
                                     Cake</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">Bento
+                                        Floral Cake</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(5)">
+                                <img src="./assets/images/blue-door/carrot-cake.jpg" alt="Spiced Walnut Carrot Cake"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
                                 <span
-                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Artisanal</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">Carrot
+                                        Cake</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(6)">
+                                <img src="./assets/images/blue-door/cheesecake-cafe.jpg"
+                                    alt="Signature Baked Cheesecake"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
+                                <span
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Cheesecake</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">Baked
+                                        Cheesecake</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="gallery-card group relative w-36 sm:w-44 h-40 sm:h-48 rounded-2xl overflow-hidden shadow-sm cursor-pointer border border-slate-100 flex-shrink-0"
+                                onclick="openGalleryModal(7)">
+                                <img src="./assets/images/blue-door/orange-cake.jpg" alt="Citrus Glazed Orange Cake"
+                                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/5 opacity-80 group-hover:opacity-90 transition-opacity">
+                                </div>
+                                <span
+                                    class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/95 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Citrus
+                                    Glaze</span>
+                                <div class="absolute bottom-2.5 left-2.5 right-2.5">
+                                    <p class="text-white text-xs font-bold truncate leading-tight drop-shadow-sm">Orange
+                                        Cake</p>
+                                    <span
+                                        class="text-[10px] text-amber-300 font-semibold flex items-center gap-1 mt-0.5 opacity-90 group-hover:opacity-100">
+                                        <span>Tap to view</span> <span>🔍</span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -814,19 +1020,17 @@
                             <span class="text-base text-rose-500">📍</span>
                             <h3 class="text-sm font-extrabold text-slate-900">Find Us</h3>
                         </div>
-                        <a id="mapHeaderLink" href="https://www.google.com/maps?cid=8696452129855489419" target="_blank"
+                        <a id="mapHeaderLink" href="#" data-link="directions" target="_blank"
                             class="text-xs font-bold text-indigo-600 hover:underline">Open in Maps →</a>
                     </div>
 
                     <div class="relative h-44 rounded-2xl overflow-hidden border border-slate-100 shadow-inner">
-                        <iframe id="mapEmbedIframe"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3297.704247068065!2d77.9985567!3d30.272292299999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092b003a555405%3A0x78b00122e639c58b!2sScoop%20n%20brew!5e1!3m2!1sen!2sin!4v1792495036661!5m2!1sen!2sin"
-                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                        <iframe id="mapEmbedIframe" src="about:blank" data-link="mapEmbed" width="100%" height="100%"
+                            style="border:0;" allowfullscreen="" loading="lazy"
                             referrerpolicy="strict-origin-when-cross-origin">
                         </iframe>
 
-                        <a id="mapFloatingBtn" href="https://www.google.com/maps?cid=8696452129855489419"
-                            target="_blank"
+                        <a id="mapFloatingBtn" href="#" data-link="directions" target="_blank"
                             class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-lg border border-slate-100 text-xs font-bold text-slate-800 flex items-center gap-1.5 hover:bg-white transition-all">
                             <span class="text-rose-500">📍</span>
                             <span>Open in Google Maps</span>
@@ -873,7 +1077,7 @@
                             <span class="text-base text-rose-500">❤️</span>
                             <h3 class="text-sm font-extrabold text-slate-900">Why People Love Us</h3>
                         </div>
-                        <span class="text-xs font-bold text-slate-400">4.9 ★ Rating</span>
+                        <span class="text-xs font-bold text-slate-400">4.2 ★ Rating</span>
                     </div>
 
                     <div id="testimonialsContainer" class="space-y-2.5">
@@ -1020,193 +1224,26 @@
     </div>
 
     <!-- ═══════════════════════════════════════════════════════════════ -->
+    <!-- MASTER BUSINESS & LINKS CONFIGURATION -->
+    <!-- (Edit js/config.js to update phone, WhatsApp, maps & links) -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <script src="./js/config.js"></script>
+
+    <!-- CENTRAL AI REVIEWS DATABASE -->
+    <!-- (Edit js/reviews-db.js to add or customize review phrases & languages) -->
+    <!-- ═══════════════════════════════════════════════════════════════ -->
+    <script src="./js/reviews-db.js"></script>
+
+    <!-- ═══════════════════════════════════════════════════════════════ -->
     <!-- LOGIC & REVIEW GENERATION SCRIPT -->
     <!-- ═══════════════════════════════════════════════════════════════ -->
     <script>
-        // Business Profile Config
-        const BUSINESS_CONFIG = {
-            id: 'blue-door-cafe-and-bakes',
-            name: 'Blue Door Café & Bakes',
-            phone: '+917455866408',
-            whatsapp: '917455866408',
-            googlePlaceId: 'ChIJl90Jb3QrCTkRkyqlCyJegcg',
-            googleReviewUrl: 'https://www.google.com/maps?cid=8696452129855489419',
-            googleWriteReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJl90Jb3QrCTkRkyqlCyJegcg',
-            address: 'Clement Town, Dehradun, Uttarakhand 248002',
-            fallbackQuery: 'Blue Door Cafe and Bakes Dehradun'
-        };
 
         // State
         let currentLang = 'ENGLISH';
         let selectedChips = new Set(['ALL']);
         let isEditing = false;
         let typingTimeout = null;
-
-        // Rich Specialized Review Bank for Blue Door Café & Bakes
-        const REVIEWS_DB = {
-            ENGLISH: {
-                openings: [
-                    "Hands down one of the coziest cafes in town! ",
-                    "Visited Blue Door Café & Bakes today and was completely blown away. ",
-                    "If you have a sweet tooth or love good coffee, this place is heaven! ",
-                    "Such a charming aesthetic cafe with genuinely delicious food. ",
-                    "Tried this spot on a friend's recommendation and it exceeded all expectations! ",
-                    "Easily a 5-star experience from the ambience to the dessert counter. ",
-                    "Finally found my new favorite weekend brunch spot! "
-                ],
-                categories: {
-                    ALL: [
-                        "Everything we ordered was crafted to perfection. Zero complaints, genuine 10/10 quality.",
-                        "Loved every single item! The vibe is so relaxing and the bakes are top notch.",
-                        "The perfect blend of warm hospitality, artisanal pastries, and rich brews."
-                    ],
-                    BISCOFF: [
-                        "The Lotus Biscoff cheesecake is an absolute showstopper! Incredibly creamy and perfectly balanced.",
-                        "If you visit, you MUST try the Lotus Biscoff cheesecake. Hands down the best in the city!"
-                    ],
-                    TIRAMISU: [
-                        "The Tiramisu cup with ladyfinger biscuit was heavenly! Rich, velvety coffee flavor.",
-                        "Authentic Italian style tiramisu done right. Soft, creamy and not overly sweet."
-                    ],
-                    PANCAKES: [
-                        "The blueberry and banana pancakes were so fluffy and warm! Best breakfast ever.",
-                        "Pancakes were golden perfection, light as a cloud and generous with fresh toppings."
-                    ],
-                    PASTA: [
-                        "The Penne Arrabbiata pasta had the perfect spicy kick and fresh herbs! Full of flavor.",
-                        "Loved their savory pasta options — rich, savory sauce cooked al dente."
-                    ],
-                    COFFEE: [
-                        "The coffee is roasted to perfection! Smooth, aromatic and gave the best morning boost.",
-                        "Specialty coffee lovers will appreciate the quality of their beans and barista skill."
-                    ],
-                    AMBIANCE: [
-                        "The aesthetic interior and soothing music make this the ultimate chill spot.",
-                        "Very cozy, aesthetic corners, ideal for work sessions or catchups with friends."
-                    ],
-                    SERVICE: [
-                        "The staff is exceptionally sweet, polite and fast with their recommendations.",
-                        "Super warm hospitality and prompt service even during busy hours."
-                    ],
-                    CLEANLINESS: [
-                        "Spotlessly clean dining area, sparkling cutlery and great hygiene standards.",
-                        "Very clean, sanitized and well-kept space with aesthetic seating."
-                    ]
-                },
-                closings: [
-                    "Can't wait to visit again!",
-                    "10/10 would highly recommend to everyone.",
-                    "Definitely ordering their cakes for my next celebration.",
-                    "A must-visit for every food lover!",
-                    "Will definitely be coming back every weekend!"
-                ]
-            },
-            HINGLISH: {
-                openings: [
-                    "bhai sach batau toh Blue Door Cafe literally slaps! ",
-                    "dosto ke sath aana yahan ka best decision tha. ",
-                    "ngl this place is a total aesthetic W. ",
-                    "dehradun me itna mast cafe aur bakery pehli baar dekha. ",
-                    "sweet craving ho rahi thi toh idhar aagaye aur dil khush ho gaya. "
-                ],
-                categories: {
-                    ALL: [
-                        "khana, coffee aur bakes sab kuch ek number the.",
-                        "quality aur taste dono top tier the, zero complaints fr.",
-                        "vibe ekdum cozy thi aur sab kuch freshly baked mila."
-                    ],
-                    BISCOFF: [
-                        "inka Lotus Biscoff cheesecake must try hai guys, muh me pighal jata hai!",
-                        "biscoff cheesecake ka texture aur crunch literally out of this world tha."
-                    ],
-                    TIRAMISU: [
-                        "tiramisu cup ka coffee flavor aur creaminess ekdum authentic laga.",
-                        "tiramisu lovers ke liye ye place heaven hai, 10/10 swaad!"
-                    ],
-                    PANCAKES: [
-                        "pancakes super fluffy aur tasty the, blueberry combo was so good.",
-                        "subah ke breakfast ke liye inke pancakes best option hain."
-                    ],
-                    PASTA: [
-                        "penne pasta ka spicy arrabbiata sauce ekdum restaurant-style hit karta hai.",
-                        "pasta ki seasoning aur fresh herbs ka flavor bohot badhiya tha."
-                    ],
-                    COFFEE: [
-                        "coffee lovers ko inki specialty brew bohot pasand aayegi.",
-                        "proper artisanal coffee vibes mili yahan aake."
-                    ],
-                    AMBIANCE: [
-                        "interior aur aesthetic vibes photos ke liye ekdum perfect hain.",
-                        "peaceful mahool aur soft music, baith ke relax karne ke liye best jagah."
-                    ],
-                    SERVICE: [
-                        "staff ka behavior bohot polite aur welcoming tha.",
-                        "order bohot jaldi serve hua aur hospitality lajawab thi."
-                    ],
-                    CLEANLINESS: [
-                        "cleanliness 10/10 thi, kitchen aur tables ekdum neat and clean.",
-                        "proper hygiene standards maintain kiye hue hain."
-                    ]
-                },
-                closings: [
-                    "pakka wapas aayenge!",
-                    "highly recommended from my side.",
-                    "10/10 experience raha.",
-                    "paisa vasool ekdum, must visit!"
-                ]
-            },
-            KANNADA: {
-                openings: [
-                    "Blue Door Café & Bakes ge bandu thumba santhosha aayithu! ",
-                    "Bengaluru nalli idhu ondu adbhutha cafe. ",
-                    "Nanna snehithara jothege illi bandidde, thumba chennagidhe! "
-                ],
-                categories: {
-                    ALL: [
-                        "Illina ellavu thindi galu fresh matthu thumba ruchi aagidhe.",
-                        "Coffee matthu cakes quality 10/10, thumba ishta aayithu.",
-                        "Shanta vaathavarana matthu utthama aahaara."
-                    ],
-                    BISCOFF: [
-                        "Lotus Biscoff cheesecake thumba creamy matthu delicious aagidhe!",
-                        "Biscoff cheesecake illi kanditha try maadi, thumba ruchi!"
-                    ],
-                    TIRAMISU: [
-                        "Tiramisu cup thumba authentic matthu ruchi aagidhe.",
-                        "Coffee flavor matthu cream combo thumba chennagidhe."
-                    ],
-                    PANCAKES: [
-                        "Pancakes thumba soft matthu fluffy aagidhe.",
-                        "Fresh blueberry pancakes thumba ishta aayithu."
-                    ],
-                    PASTA: [
-                        "Penne pasta ruchi adbhutha aagidhe, spicy & delicious.",
-                        "Pasta preparation thumba utthama aagidhe."
-                    ],
-                    COFFEE: [
-                        "Illina specialty coffee thumba fresh matthu aromatic aagidhe.",
-                        "Coffee lovers ge idhu ondu utthama spot."
-                    ],
-                    AMBIANCE: [
-                        "Cafe interior matthu ambience thumba shanta matthu sundara aagidhe.",
-                        "Photo thegeyalu thumba aesthetic place."
-                    ],
-                    SERVICE: [
-                        "Staff thumba vinamravagi matthu sahayaka aagi iddare.",
-                        "Seve thumba bega matthu utthama aagithu."
-                    ],
-                    CLEANLINESS: [
-                        "Cafe thumba swachhavagi matthu hygienic aagi idhe.",
-                        "Hygiene standards thumba chennagidhe."
-                    ]
-                },
-                closings: [
-                    "Matthe kanditha baruttene!",
-                    "Ellarigoo highly recommend maaduttene.",
-                    "Thumba utthama anubhava!"
-                ]
-            }
-        };
 
         const EMOJIS = ["✨", "🍰", "☕", "🤤", "👌", "🔥", "❤️", "🙌", "💯"];
 
@@ -1685,6 +1722,7 @@
 
         // Auto-run on load
         window.addEventListener('DOMContentLoaded', () => {
+            applyLinks();      // Wire all links from SITE_LINKS config
             generateAIReview();
 
             // Setup Scroll Spy to synchronize top nav pills on scroll
