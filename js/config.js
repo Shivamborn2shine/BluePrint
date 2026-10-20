@@ -19,11 +19,11 @@ export const BUSINESS_CONFIG = {
     },
 
     // Google Maps Place & Review URLs
-    googlePlaceId: '14447932579898534547',
+    googlePlaceId: 'ChIJl90Jb3QrCTkRkyqlCyJegcg',
     googleHexFeatureId: '0x39092b746f09dd97:0xc8815e220ba52a93',
     googleReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJl90Jb3QrCTkRkyqlCyJegcg',
-    googleWriteReviewUrl: 'https://search.google.com/local/writereview?placeid=14447932579898534547',
-    mapsEmbedUrl: 'https://maps.google.com/maps?q=30.2629266,77.9993898&t=&z=16&ie=UTF8&iwloc=&output=embed',
+    googleWriteReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJl90Jb3QrCTkRkyqlCyJegcg',
+    mapsEmbedUrl: 'https://www.google.com/maps?cid=8696452129855489419',
 
     // Telemetry Sync with central ONESCAN Dashboard
     dashboardSync: true

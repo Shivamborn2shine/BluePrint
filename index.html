@@ -55,6 +55,20 @@
             color: #4338CA !important;
             font-weight: 700 !important;
         }
+
+        /* Developer Visual Edit Mode Styles */
+        body.dev-mode-active img:hover {
+            outline: 3px dashed #F59E0B !important;
+            outline-offset: 2px;
+            cursor: pointer;
+            filter: brightness(0.95);
+        }
+
+        body.dev-mode-active [data-dev-edit]:hover {
+            outline: 2px dashed #6366F1 !important;
+            outline-offset: 2px;
+            cursor: text;
+        }
     </style>
 </head>
 
@@ -75,13 +89,15 @@
         <header
             class="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-100 px-4 py-3 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <div
+                <div id="storeBrandInitials"
                     class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-md shadow-blue-500/20">
                     BD
                 </div>
                 <div>
-                    <h1 class="text-xs font-bold text-slate-900 leading-tight">Blue Door Café & Bakes</h1>
-                    <span class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+                    <h1 id="storeHeaderName" class="text-xs font-bold text-slate-900 leading-tight">Blue Door Café &
+                        Bakes</h1>
+                    <span id="storeStatusBadge"
+                        class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Open Now • 9 AM -
                         10:30 PM
                     </span>
@@ -111,18 +127,19 @@
             <section id="homeSection" class="relative">
                 <!-- Hero Photo Banner -->
                 <div class="relative h-60 w-full overflow-hidden bg-slate-900">
-                    <img src="./assets/images/blue-door/hero-food-collage.jpg" alt="Blue Door Cafe & Bakes Delicacies"
+                    <img id="heroBannerImg" src="./assets/images/blue-door/hero-food-collage.jpg"
+                        alt="Blue Door Cafe & Bakes Delicacies"
                         class="w-full h-full object-cover opacity-90 scale-105 hover:scale-100 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/30"></div>
 
                     <!-- Good Food Good Vibes Handwriting Badge -->
-                    <div
+                    <div id="heroHandwriting"
                         class="absolute top-4 right-4 text-amber-300 font-script text-2xl drop-shadow-md rotate-[-8deg] pointer-events-none select-none">
                         Good Food<br>&nbsp;&nbsp;Good Vibes ✨
                     </div>
 
                     <div class="absolute top-4 left-4">
-                        <span
+                        <span id="heroCategoryBadge"
                             class="px-2.5 py-1 rounded-full bg-black/40 backdrop-blur-md text-white text-[10px] font-bold border border-white/20">
                             ☕ Artisanal Café
                         </span>
@@ -136,8 +153,8 @@
                     <div class="relative -mt-16 mb-2 inline-block">
                         <div
                             class="w-20 h-20 rounded-full border-4 border-white shadow-xl overflow-hidden bg-white flex items-center justify-center">
-                            <img src="./assets/images/blue-door/blue-door-sign.png" alt="Blue Door Cafe & Bakes Logo"
-                                class="w-full h-full object-cover rounded-full">
+                            <img id="storeLogoImg" src="./assets/images/blue-door/blue-door-sign.png"
+                                alt="Blue Door Cafe & Bakes Logo" class="w-full h-full object-cover rounded-full">
                         </div>
                         <span
                             class="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] border-2 border-white shadow"
@@ -147,17 +164,18 @@
                     </div>
 
                     <!-- Business Title & Rating -->
-                    <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">BLUE DOOR CAFÉ & BAKES</h2>
+                    <h2 id="storeMainName" class="text-xl font-extrabold text-slate-900 tracking-tight">BLUE DOOR CAFÉ &
+                        BAKES</h2>
 
                     <div class="flex items-center justify-center gap-1.5 mt-1">
-                        <div class="flex text-amber-400 text-xs">★★★★★</div>
-                        <span class="text-xs font-extrabold text-slate-800">4.2</span>
-                        <span class="text-[11px] text-slate-500">(110+ reviews)</span>
+                        <div id="ratingStars" class="flex text-amber-400 text-xs">★★★★★</div>
+                        <span id="ratingValue" class="text-xs font-extrabold text-slate-800">4.9</span>
+                        <span id="ratingCountText" class="text-[11px] text-slate-500">(1,240+ reviews)</span>
                         <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google"
                             class="h-3 ml-1 opacity-80">
                     </div>
 
-                    <p class="text-xs text-slate-500 mt-1.5 px-4 font-medium leading-relaxed">
+                    <p id="storeTagline" class="text-xs text-slate-500 mt-1.5 px-4 font-medium leading-relaxed">
                         Artisanal bakes, specialty coffee & handcrafted desserts in Dehradun
                     </p>
 
@@ -179,7 +197,7 @@
 
                     <!-- Action Buttons Row (Call, WhatsApp, Directions, Menu, Share) -->
                     <div class="grid grid-cols-5 gap-2 pt-5 mt-4 border-t border-slate-100">
-                        <a href="tel:+917455866408" class="flex flex-col items-center gap-1.5 group">
+                        <a id="callStoreBtn" href="tel:+917455866408" class="flex flex-col items-center gap-1.5 group">
                             <div
                                 class="w-11 h-11 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-all">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -191,7 +209,8 @@
                             <span class="text-[10px] font-bold text-slate-600">Call</span>
                         </a>
 
-                        <a href="https://wa.me/917455866408?text=Hi%20Blue%20Door%20Caf%C3%A9%20%26%20Bakes,%20I%20would%20like%20to%20order%20or%20reserve%20a%20table"
+                        <a id="whatsappStoreBtn"
+                            href="https://wa.me/917455866408?text=Hi%20Blue%20Door%20Caf%C3%A9%20%26%20Bakes,%20I%20would%20like%20to%20order%20or%20reserve%20a%20table"
                             target="_blank" class="flex flex-col items-center gap-1.5 group">
                             <div
                                 class="w-11 h-11 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-all">
@@ -203,7 +222,8 @@
                             <span class="text-[10px] font-bold text-slate-600">WhatsApp</span>
                         </a>
 
-                        <a href="https://www.google.com/maps/place/Blue+Door+Cafe+and+Bakes/@30.2629266,77.9993898,17z/data=!4m8!3m7!1s0x39092b746f09dd97:0xc8815e220ba52a93!8m2!3d30.2629266!4d77.9993898!9m1!1b1!16s%2Fg%2F11vcwgp634"
+                        <a id="directionsBtn"
+                            href="https://www.google.com/maps/place/Blue+Door+Cafe+and+Bakes/@30.2629266,77.9993898,17z/data=!4m8!3m7!1s0x39092b746f09dd97:0xc8815e220ba52a93!8m2!3d30.2629266!4d77.9993898!9m1!1b1!16s%2Fg%2F11vcwgp634"
                             target="_blank" class="flex flex-col items-center gap-1.5 group">
                             <div
                                 class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-rose-500 to-pink-500 text-white flex items-center justify-center shadow-md shadow-pink-500/20 group-hover:scale-105 transition-all">
@@ -219,7 +239,7 @@
                             <span class="text-[10px] font-bold text-slate-600">Directions</span>
                         </a>
 
-                        <a href="#menu" onclick="scrollToSection('specialitiesRow')"
+                        <a id="menuBtn" href="#menu" onclick="scrollToSection('specialitiesRow')"
                             class="flex flex-col items-center gap-1.5 group">
                             <div
                                 class="w-11 h-11 rounded-2xl bg-blue-500 text-white flex items-center justify-center shadow-md shadow-blue-500/20 group-hover:scale-105 transition-all">
@@ -229,7 +249,7 @@
                                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
                             </div>
-                            <span class="text-[10px] font-bold text-slate-600">Menu</span>
+                            <span id="menuBtnLabel" class="text-[10px] font-bold text-slate-600">Menu</span>
                         </a>
 
                         <button onclick="sharePage()" class="flex flex-col items-center gap-1.5 group">
@@ -280,7 +300,8 @@
                             onclick="scrollToSection('gallerySection')">View Gallery →</span>
                     </div>
 
-                    <div class="flex gap-3 overflow-x-auto hide-scrollbar pb-2 pt-1 -mx-3 px-3">
+                    <div id="specialitiesRowContainer"
+                        class="flex gap-3 overflow-x-auto hide-scrollbar pb-2 pt-1 -mx-3 px-3">
                         <!-- Item 1: Biscoff Cheesecake -->
                         <div class="flex-shrink-0 flex flex-col items-center w-20 cursor-pointer group"
                             onclick="quickSelectCategory('BISCOFF')">
@@ -390,8 +411,7 @@
                         <span class="text-xs text-slate-400">▼</span>
                     </div>
 
-                    <a href="https://www.google.com/maps/place/Blue+Door+Cafe+and+Bakes/@30.2629266,77.9993898,17z/data=!4m8!3m7!1s0x39092b746f09dd97:0xc8815e220ba52a93!8m2!3d30.2629266!4d77.9993898!9m1!1b1!16s%2Fg%2F11vcwgp634"
-                        target="_blank"
+                    <a href="https://www.google.com/maps?cid=8696452129855489419" target="_blank"
                         class="bg-white rounded-2xl p-3.5 border border-slate-100 flex items-center justify-between shadow-sm hover:border-blue-200 transition-colors">
                         <div class="flex items-center gap-3">
                             <span class="text-blue-500 text-base">📍</span>
@@ -609,11 +629,13 @@
                             <h3 class="text-sm font-extrabold text-slate-900">Culinary Gallery</h3>
                         </div>
                         <span id="galleryCountBadge"
-                            class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2.5 py-0.5 rounded-full">8 Items</span>
+                            class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2.5 py-0.5 rounded-full">8
+                            Items</span>
                     </div>
 
                     <!-- Category Filter Tabs -->
-                    <div class="flex items-center gap-1.5 mb-3.5 overflow-x-auto hide-scrollbar pb-1 text-[11px] font-bold">
+                    <div
+                        class="flex items-center gap-1.5 mb-3.5 overflow-x-auto hide-scrollbar pb-1 text-[11px] font-bold">
                         <button type="button" onclick="filterGallery('all')" id="gFilter-all"
                             class="g-filter-btn px-3 py-1 rounded-xl bg-slate-900 text-white shadow-sm transition-all flex-shrink-0">
                             All (8)
@@ -635,11 +657,17 @@
                             data-category="bakes" onclick="openGalleryModal(0)">
                             <img src="./assets/images/blue-door/biscoff-cheesecake.jpg" alt="Lotus Biscoff Cheesecake"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
-                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Cheesecake</span>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
+                            </div>
+                            <span
+                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Cheesecake</span>
                             <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
-                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Lotus Biscoff</span>
-                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                                <span
+                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Lotus
+                                    Biscoff</span>
+                                <span
+                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
                             </div>
                         </div>
 
@@ -648,11 +676,17 @@
                             data-category="brunch" onclick="openGalleryModal(1)">
                             <img src="./assets/images/blue-door/fluffy-pancakes.jpg" alt="Fluffy Blueberry Pancakes"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
-                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Brunch</span>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
+                            </div>
+                            <span
+                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Brunch</span>
                             <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
-                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Blueberry Pancakes</span>
-                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                                <span
+                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Blueberry
+                                    Pancakes</span>
+                                <span
+                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
                             </div>
                         </div>
 
@@ -661,11 +695,17 @@
                             data-category="brunch" onclick="openGalleryModal(2)">
                             <img src="./assets/images/blue-door/penne-pasta.jpg" alt="Penne Arrabbiata Pasta"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
-                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Savory</span>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
+                            </div>
+                            <span
+                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Savory</span>
                             <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
-                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Arrabbiata Pasta</span>
-                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                                <span
+                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Arrabbiata
+                                    Pasta</span>
+                                <span
+                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
                             </div>
                         </div>
 
@@ -674,11 +714,17 @@
                             data-category="bakes" onclick="openGalleryModal(3)">
                             <img src="./assets/images/blue-door/tiramisu-cup.jpg" alt="Classic Tiramisu Cup"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
-                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Dessert</span>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
+                            </div>
+                            <span
+                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Dessert</span>
                             <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
-                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Tiramisu Cup</span>
-                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                                <span
+                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Tiramisu
+                                    Cup</span>
+                                <span
+                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
                             </div>
                         </div>
 
@@ -687,11 +733,18 @@
                             data-category="bakes" onclick="openGalleryModal(4)">
                             <img src="./assets/images/blue-door/bento-cake.jpg" alt="Floral Bento Cake"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
-                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Bento Cake</span>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
+                            </div>
+                            <span
+                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Bento
+                                Cake</span>
                             <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
-                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Bento Floral Cake</span>
-                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                                <span
+                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Bento
+                                    Floral Cake</span>
+                                <span
+                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
                             </div>
                         </div>
 
@@ -700,11 +753,17 @@
                             data-category="bakes" onclick="openGalleryModal(5)">
                             <img src="./assets/images/blue-door/carrot-cake.jpg" alt="Spiced Walnut Carrot Cake"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
-                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Artisanal</span>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
+                            </div>
+                            <span
+                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Artisanal</span>
                             <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
-                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Carrot Cake</span>
-                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                                <span
+                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Carrot
+                                    Cake</span>
+                                <span
+                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
                             </div>
                         </div>
 
@@ -713,11 +772,17 @@
                             data-category="bakes" onclick="openGalleryModal(6)">
                             <img src="./assets/images/blue-door/cheesecake-cafe.jpg" alt="Signature Baked Cheesecake"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
-                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Cheesecake</span>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
+                            </div>
+                            <span
+                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Cheesecake</span>
                             <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
-                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Baked Cheesecake</span>
-                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                                <span
+                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Baked
+                                    Cheesecake</span>
+                                <span
+                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
                             </div>
                         </div>
 
@@ -726,11 +791,18 @@
                             data-category="bakes" onclick="openGalleryModal(7)">
                             <img src="./assets/images/blue-door/orange-cake.jpg" alt="Citrus Glazed Orange Cake"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity"></div>
-                            <span class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Citrus Glaze</span>
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10 opacity-80 group-hover:opacity-90 transition-opacity">
+                            </div>
+                            <span
+                                class="absolute top-2 right-2 px-2 py-0.5 rounded-full bg-white/90 text-slate-800 text-[8px] font-extrabold backdrop-blur-sm shadow-sm">Citrus
+                                Glaze</span>
                             <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
-                                <span class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Orange Cake</span>
-                                <span class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
+                                <span
+                                    class="px-2 py-0.5 rounded-full bg-black/60 text-white text-[9px] font-bold backdrop-blur-sm inline-block truncate max-w-full">Orange
+                                    Cake</span>
+                                <span
+                                    class="text-white text-xs opacity-0 group-hover:opacity-100 transition-opacity">🔍</span>
                             </div>
                         </div>
                     </div>
@@ -743,17 +815,19 @@
                             <span class="text-base text-rose-500">📍</span>
                             <h3 class="text-sm font-extrabold text-slate-900">Find Us</h3>
                         </div>
-                        <a href="https://www.google.com/maps/place/Blue+Door+Cafe+and+Bakes/@30.2629266,77.9993898,17z/data=!4m8!3m7!1s0x39092b746f09dd97:0xc8815e220ba52a93!8m2!3d30.2629266!4d77.9993898!9m1!1b1!16s%2Fg%2F11vcwgp634"
+                        <a id="mapHeaderLink"
+                            href="https://www.google.com/maps/place/Blue+Door+Cafe+and+Bakes/@30.2629266,77.9993898,17z/data=!4m8!3m7!1s0x39092b746f09dd97:0xc8815e220ba52a93!8m2!3d30.2629266!4d77.9993898!9m1!1b1!16s%2Fg%2F11vcwgp634"
                             target="_blank" class="text-xs font-bold text-indigo-600 hover:underline">Open in Maps →</a>
                     </div>
 
                     <div class="relative h-44 rounded-2xl overflow-hidden border border-slate-100 shadow-inner">
-                        <iframe
+                        <iframe id="mapEmbedIframe"
                             src="https://maps.google.com/maps?q=30.2629266,77.9993898&t=&z=16&ie=UTF8&iwloc=&output=embed"
                             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
                         </iframe>
 
-                        <a href="https://www.google.com/maps/place/Blue+Door+Cafe+and+Bakes/@30.2629266,77.9993898,17z/data=!4m8!3m7!1s0x39092b746f09dd97:0xc8815e220ba52a93!8m2!3d30.2629266!4d77.9993898!9m1!1b1!16s%2Fg%2F11vcwgp634"
+                        <a id="mapFloatingBtn"
+                            href="https://www.google.com/maps/place/Blue+Door+Cafe+and+Bakes/@30.2629266,77.9993898,17z/data=!4m8!3m7!1s0x39092b746f09dd97:0xc8815e220ba52a93!8m2!3d30.2629266!4d77.9993898!9m1!1b1!16s%2Fg%2F11vcwgp634"
                             target="_blank"
                             class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-lg border border-slate-100 text-xs font-bold text-slate-800 flex items-center gap-1.5 hover:bg-white transition-all">
                             <span class="text-rose-500">📍</span>
@@ -766,17 +840,19 @@
                 <div class="bg-white rounded-3xl p-5 border border-slate-100 shadow-sm space-y-3">
                     <div class="flex items-center gap-2">
                         <span class="text-base text-amber-500">☕</span>
-                        <h3 class="text-sm font-extrabold text-slate-900">About Blue Door Café & Bakes</h3>
+                        <h3 id="aboutTitle" class="text-sm font-extrabold text-slate-900">About Blue Door Café & Bakes
+                        </h3>
                     </div>
 
-                    <p class="text-xs text-slate-600 leading-relaxed">
+                    <p id="aboutDescription" class="text-xs text-slate-600 leading-relaxed">
                         Blue Door Café & Bakes was founded with a love for artisanal European baking and rich, velvety
                         specialty roasts. From flaky breakfast pastries and fluffy banana blueberry pancakes to decadent
                         Lotus Biscoff cheesecakes, every recipe is made from scratch with authentic butter, fine
                         chocolate, and pure passion.
                     </p>
 
-                    <div class="grid grid-cols-2 gap-2 pt-1 text-[11px] font-semibold text-slate-700">
+                    <div id="aboutHighlightsGrid"
+                        class="grid grid-cols-2 gap-2 pt-1 text-[11px] font-semibold text-slate-700">
                         <div class="flex items-center gap-2 p-2 rounded-xl bg-slate-50">
                             <span>✨</span> 100% Real Dairy Butter
                         </div>
@@ -802,7 +878,7 @@
                         <span class="text-xs font-bold text-slate-400">4.9 ★ Rating</span>
                     </div>
 
-                    <div class="space-y-2.5">
+                    <div id="testimonialsContainer" class="space-y-2.5">
                         <div class="p-3 rounded-2xl bg-slate-50 border border-slate-100/80">
                             <div class="flex items-center justify-between mb-1">
                                 <div class="flex items-center gap-2">
@@ -868,9 +944,9 @@
 
                 <!-- Footer -->
                 <div class="text-center pt-2 pb-6 text-slate-400 text-[10px] space-y-1">
-                    <p>Powered by <strong class="text-slate-600 font-bold">ONESCAN Reviews</strong> • AI Experience
-                        Engine</p>
-                    <p>© 2026 Blue Door Café & Bakes. All rights reserved.</p>
+                    <p>Powered by <strong id="footerPoweredBy" class="text-slate-600 font-bold">ONESCAN Reviews</strong>
+                        <span id="footerPoweredBySub">• AI Experience Engine</span></p>
+                    <p id="footerCopyright">© 2026 Blue Door Café & Bakes. All rights reserved.</p>
                 </div>
 
             </section>
@@ -925,7 +1001,8 @@
             <!-- Details & Caption -->
             <div class="space-y-1">
                 <h4 id="modalTitle" class="text-sm font-extrabold text-white leading-snug">Lotus Biscoff Cheesecake</h4>
-                <p id="modalDesc" class="text-xs text-slate-300 leading-relaxed">Creamy layered artisanal cheesecake with authentic Lotus Biscoff spread and biscuit crumb crust.</p>
+                <p id="modalDesc" class="text-xs text-slate-300 leading-relaxed">Creamy layered artisanal cheesecake
+                    with authentic Lotus Biscoff spread and biscuit crumb crust.</p>
             </div>
 
             <!-- Quick Action: Review with AI Button -->
@@ -1203,7 +1280,9 @@
 
         // Generate AI Review with Typewriter Effect
         function generateAIReview() {
-            const db = REVIEWS_DB[currentLang] || REVIEWS_DB.ENGLISH;
+            const activeBank = (window.CURRENT_STORE_DATA && window.CURRENT_STORE_DATA.reviewBank) ? window.CURRENT_STORE_DATA.reviewBank : REVIEWS_DB;
+            const langKey = currentLang === 'HINGLISH' ? 'HINDI' : currentLang;
+            const db = activeBank[langKey] || activeBank[currentLang] || activeBank.ENGLISH || REVIEWS_DB.ENGLISH;
             const customWords = document.getElementById('customWordsInput')?.value.trim();
 
             const opening = getRandomItem(db.openings);
@@ -1639,6 +1718,8 @@
         };
     </script>
     <script src="./js/telemetry.js"></script>
+    <!-- Developer Master Data & Live In-Browser CMS Editor -->
+    <script type="module" src="./js/dev-editor.js"></script>
 
 </body>
 
